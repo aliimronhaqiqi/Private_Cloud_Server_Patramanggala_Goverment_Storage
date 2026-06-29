@@ -1,0 +1,71 @@
+services:
+  db:
+    image: mariadb:${MARIADB_VERSION}
+    container_name: ${COMPOSE_PROJECT_NAME}-db
+
+    restart: unless-stopped
+
+    env_file:
+      - .env
+
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      TZ: ${TZ}
+
+    command:
+      - --transaction-isolation=READ-COMMITTED
+      - --binlog-format=ROW
+
+    volumes:
+      - db_data:/var/lib/mysql
+
+    networks:
+      - backend
+
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  app:
+    image: nextcloud:${NEXTCLOUD_VERSION}
+    container_name: ${COMPOSE_PROJECT_NAME}-app
+
+    restart: unless-stopped
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+    env_file:
+      - .env
+
+    environment:
+      MYSQL_HOST: db
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      TZ: ${TZ}
+
+    ports:
+      - "8080:80"
+
+    volumes:
+      - nextcloud_app:/var/www/html
+      - /mnt/storage/nextcloud-data:/var/www/html/data
+
+    networks:
+      - backend
+
+volumes:
+  db_data:
+  nextcloud_app:
+
+networks:
+  backend:
+    driver: bridge
