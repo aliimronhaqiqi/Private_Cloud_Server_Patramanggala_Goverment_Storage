@@ -62,10 +62,25 @@ services:
     networks:
       - backend
 
+  redis:
+    image: redis:7-alpine
+    container_name: ${COMPOSE_PROJECT_NAME}-redis
+
+    restart: unless-stopped
+
+    command: redis-server --appendonly yes
+
+    volumes:
+      - redis_data:/data
+
+    networks:
+      - backend
+
+
 volumes:
   db_data:
   nextcloud_app:
-
+  redis_data:
 networks:
   backend:
     driver: bridge
