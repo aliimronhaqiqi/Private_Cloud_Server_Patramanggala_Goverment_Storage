@@ -19,3 +19,6 @@ ssl/*
 *.bak
 
 .DS_Store
+
+config.before-waf.php
+docker-compose.yml.before-waf
