@@ -4,12 +4,13 @@
 
 - Ubuntu Server 24.04 LTS
 - Docker Compose
+- HAProxy Reverse Proxy
+- Native WAF (HAProxy ACL)
 - Nextcloud Node 1
 - Nextcloud Node 2
 - MariaDB
 - Redis
-- HAProxy Reverse Proxy
-- Native WAF (HAProxy ACL)
+- Storage HDD
 - Tailscale VPN
 - HTTPS (Tailscale TLS Certificate)
 - Uptime Kuma
@@ -58,11 +59,9 @@ Round Robin
    │
 Nextcloud Node 1 / Node 2
    │
-MariaDB
-   │
-Redis
-   │
-Storage
+   ├── MariaDB
+   ├── Redis
+   └── Storage HDD
 ---
 
 ## High Availability
@@ -88,7 +87,6 @@ Whenever a monitored service changes its status, Uptime Kuma automatically sends
 
 ## Native Web Application Firewall
 
-Instead of deploying ModSecurity, this project implements a lightweight Native Web Application Firewall using HAProxy Access Control Lists (ACL).
 To improve security without introducing additional middleware, this project implements a lightweight Native Web Application Firewall using HAProxy Access Control Lists (ACL).
 Implemented protection includes:
 
