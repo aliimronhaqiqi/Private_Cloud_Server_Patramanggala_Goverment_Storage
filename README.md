@@ -303,7 +303,7 @@ Detailed technical documentation is available in the **docs** directory.
 
 # Author
 
-**Muhamad Ali Imron Haqiqi**
+**PROJECT-2**
 
 Bachelor of Informatics Engineering
 
