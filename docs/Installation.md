@@ -1,52 +1,45 @@
 # Installation Guide
 
+## Overview
+
+This document describes the installation process for Patramanggala Cloud from a fresh Ubuntu Server installation to a fully operational private cloud environment.
+
+---
+
 ## System Requirements
 
+Minimum Requirements
+
 - Ubuntu Server 24.04 LTS
+- 2 CPU Cores
+- 4 GB RAM
+- 50 GB Storage
 - Docker Engine
 - Docker Compose
-- Git
-- Tailscale
 - Internet Connection
 
+Recommended Requirements
+
+- 4 CPU Cores
+- 8 GB RAM
+- SSD Storage
+- Dedicated Storage HDD
+- Static Local IP
+
 ---
 
-## Install Docker
+## Prerequisites
+
+Before starting, ensure the following software is installed:
+
+- Git
+- Docker Engine
+- Docker Compose
+- Curl
+
+Verify installation
 
 ```bash
-sudo apt update
-sudo apt install docker.io docker-compose-v2 -y
-```
-
----
-
-## Clone Repository
-
-```bash
-git clone git@github.com:aliimronhaqiqi/Patramanggala_Cloud.git
-cd Patramanggala_Cloud
-```
-
----
-
-## Configure Environment
-
-Edit file `.env` sesuai kebutuhan.
-
----
-
-## Run Docker
-
-```bash
-docker compose up -d
-```
-
----
-
-## Verify
-
-```bash
-docker ps
-```
-
-Semua container harus berstatus **Up**.
+docker --version
+docker compose version
+git --version
