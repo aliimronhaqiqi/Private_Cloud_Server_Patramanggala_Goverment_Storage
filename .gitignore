@@ -22,3 +22,8 @@ ssl/*
 
 config.before-waf.php
 docker-compose.yml.before-waf
+
+# Uptime Kuma Database
+services/monitoring/uptime-kuma/*.db
+services/monitoring/uptime-kuma/*.db-shm
+services/monitoring/uptime-kuma/*.db-wal
