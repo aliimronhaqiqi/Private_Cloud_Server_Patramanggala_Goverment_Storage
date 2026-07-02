@@ -1,0 +1,9 @@
+services:
+  demo-backend:
+    image: nginx:alpine
+    container_name: patramanggala_demo_backend
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+    volumes:
+      - ./html:/usr/share/nginx/html:ro
