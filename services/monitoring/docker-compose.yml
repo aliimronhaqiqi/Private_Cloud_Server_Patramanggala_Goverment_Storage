@@ -1,0 +1,11 @@
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma:latest
+    container_name: patramanggala_uptime_kuma
+    restart: unless-stopped
+
+    ports:
+      - "3001:3001"
+
+    volumes:
+      - ./uptime-kuma:/app/data
